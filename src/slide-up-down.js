@@ -53,7 +53,7 @@ export default {
   computed: {
     style () {
       return {
-        overflow: 'hidden',
+        /*overflow: 'hidden',*/
         'transition-property': 'height',
         height: this.isMounted ? this.maxHeight + 'px' : 'auto',
         'transition-duration': this.duration + 'ms'
@@ -73,9 +73,17 @@ export default {
 
         // call this explicitely to force a new layout
         this.offsetHeight = container.offsetHeight
+        setTimeout(() => {
+          container.classList.remove('sliding-up')
+          container.style.removeProperty('overflow')
+        }, this.duration)
       } else {
+        container.classList.add('sliding-up')
+        container.style.overflow = 'hidden'
         this.maxHeight = 0
       }
     }
   }
+
+
 }
